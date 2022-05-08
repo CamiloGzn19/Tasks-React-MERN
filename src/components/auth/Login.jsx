@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   // State para iniciar sesión
@@ -24,7 +25,6 @@ const Login = () => {
     // Validar campos vacíos
 
     // Pasarlo al Action
-
   };
 
   return (
@@ -64,6 +64,10 @@ const Login = () => {
             />
           </div>
         </form>
+
+        <Link to="nueva-cuenta" className="enlace-cuenta">
+          Obtener Cuenta
+        </Link>
       </div>
     </div>
   );
