@@ -9,9 +9,7 @@ import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
   OBTENER_USUARIO,
-  LOGIN_EXITOSO,
   LOGIN_ERROR,
-  CERRAR_SESION,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -25,10 +23,10 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Las funciones
-
   const registrarUsuario = async (datos) => {
     try {
       const respuesta = await clienteAxios.post("/api/usuarios", datos);
+      console.log(respuesta.data);
       dispatch({
         type: REGISTRO_EXITOSO,
         payload: respuesta.data,
@@ -54,7 +52,6 @@ const AuthState = (props) => {
     if (token) {
       tokenAuth(token);
     }
-
     try {
       const respuesta = await clienteAxios.get("/api/auth");
       console.log(respuesta);
