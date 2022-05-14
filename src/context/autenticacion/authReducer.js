@@ -16,11 +16,16 @@ export default (state, action) => {
         autenticado: true,
         mensaje: null,
       };
+    case CERRAR_SESION:
+    case LOGIN_ERROR:
     case REGISTRO_ERROR:
       return {
         ...state,
         token: null,
+        usuario: null,
+        autenticado: null,
         mensaje: action.payload,
+        cargando: false,
       };
     default:
       return state;
