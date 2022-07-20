@@ -4,7 +4,7 @@ import authContext from "../../context/autenticacion/authContext";
 
 const RutaPrivada = ({ children }) => {
   const AuthContext = useContext(authContext);
-  const { autenticado } = AuthContext;
+  const { autenticado, cargando } = AuthContext;
 
   return autenticado ? children : <Navigate to="/" />;
 };

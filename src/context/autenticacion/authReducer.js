@@ -16,6 +16,7 @@ export default (state, action) => {
         ...state,
         autenticado: true,
         mensaje: null,
+        cargando: false,
       };
 
     case OBTENER_USUARIO:
@@ -23,6 +24,7 @@ export default (state, action) => {
         ...state,
         autenticado: true,
         usuario: action.payload,
+        cargando: false,
       };
     case CERRAR_SESION:
     case LOGIN_ERROR:
@@ -34,6 +36,7 @@ export default (state, action) => {
         usuario: null,
         autenticado: null,
         mensaje: action.payload,
+        cargando: false,
       };
     default:
       return state;
