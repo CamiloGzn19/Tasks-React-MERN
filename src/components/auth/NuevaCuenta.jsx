@@ -14,6 +14,7 @@ const NuevaCuenta = (props) => {
 
   // En caso de que el usuario se haya auth o reg duplicado
   let navigate = useNavigate();
+  
   useEffect(() => {
     if (autenticado) {
       navigate("/proyectos");

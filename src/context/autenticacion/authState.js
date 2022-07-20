@@ -10,6 +10,8 @@ import {
   REGISTRO_ERROR,
   OBTENER_USUARIO,
   LOGIN_ERROR,
+  CERRAR_SESION,
+  LOGIN_EXITOSO,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -52,6 +54,7 @@ const AuthState = (props) => {
     if (token) {
       tokenAuth(token);
     }
+
     try {
       const respuesta = await clienteAxios.get("/api/auth");
       console.log(respuesta);
@@ -67,6 +70,39 @@ const AuthState = (props) => {
     }
   };
 
+  // Cuando el usuario inicia sesión
+  const iniciarSesion = async (datos) => {
+    try {
+      const respuesta = await clienteAxios.post("/api/auth", datos);
+
+      dispatch({
+        type: LOGIN_EXITOSO,
+        payload: respuesta.data,
+      });
+
+      // Obtener el usuario
+      usuarioAutenticado();
+    } catch (error) {
+      console.log(error.response.data.msg);
+      const alerta = {
+        msg: error.response.data.msg,
+        categoria: "alerta-error",
+      };
+
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: alerta,
+      });
+    }
+  };
+
+  // Cierra la sesión del usuario
+  const cerrarSesion = () => {
+    dispatch({
+      type: CERRAR_SESION,
+    });
+  };
+
   return (
     <authContext.Provider
       value={{
@@ -75,6 +111,9 @@ const AuthState = (props) => {
         usuario: state.usuario,
         mensaje: state.mensaje,
         registrarUsuario,
+        iniciarSesion,
+        usuarioAutenticado,
+        cerrarSesion
       }}
     >
       {props.children}
